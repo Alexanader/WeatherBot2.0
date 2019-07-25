@@ -1,8 +1,14 @@
 certifi==2018.1.18
 chardet==3.0.4
+Click==7.0
+Flask==0.12.2
 idna==2.6
+itsdangerous==1.1.0
+Jinja2==2.10.1
+MarkupSafe==1.1.1
 pyTelegramBotAPI==3.5.1
 requests==2.18.4
+schedule==0.6.0
 six==1.11.0
 urllib3==1.22
-flask==0.12.2
+Werkzeug==0.15.5
