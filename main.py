@@ -268,7 +268,7 @@ Wind speed: {5}""".format(result['name'], result['description'],
 
 
 x    = time(6, 59, 00, 00000)
-y    = time(7, 02, 00, 00000)
+y    = time(7, 2, 00, 00000)
 secs = 30
 
 
