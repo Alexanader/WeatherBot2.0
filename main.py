@@ -1,10 +1,10 @@
 import telebot
 import constants
 import requests
-
+from flask import Flask, request
 import logging
 from telebot import util
-
+import os
 from threading import Timer
 import json 
 
@@ -13,11 +13,11 @@ from datetime import datetime, time
 API_TOKEN = constants.token
 appid = constants.appid
 units = "metric"
-
+server = Flask(__name__)
 
 bot = telebot.TeleBot(API_TOKEN)
 bot.delete_webhook()
-#server = Flask(name)
+
 
 # Запись в файл в формате json.
 
@@ -268,7 +268,7 @@ Wind speed: {5}""".format(result['name'], result['description'],
 
 
 x    = time(6, 59, 00, 00000)
-y    = time(15, 45, 00, 00000)
+y    = time(7, 62, 00, 00000)
 secs = 30
 
 
@@ -284,6 +284,19 @@ def every_day():
 
 t = Timer(secs, every_day)
 t.start()
+
+@server.route('/' + API_TOKEN, methods=['POST'])
+def getMessage():
+    bot.process_new_updates([telebot.types.Update.de_json(request.stream.read().decode("UTF-8"))])
+    return "!", 200
+
+@server.route('/')
+def webhook():
+    bot.remove_webhook()
+    bot.set_webhook(url= 'https://ancient-wave-55409.herokuapp.com/', + 'API_TOKEN')
+    return "!", 200
+
+
 
             
 if __name__ == '__main__':
