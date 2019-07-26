@@ -267,8 +267,8 @@ Wind speed: {5}""".format(result['name'], result['description'],
                           result['max temperature'], result['wind']))
 
 
-x    = time(6, 59, 00, 00000)
-y    = time(7, 2, 00, 00000)
+x    = time(15, 00, 00, 00000)
+y    = time(15, 24, 00, 00000)
 secs = 30
 
 
@@ -285,22 +285,22 @@ def every_day():
 t = Timer(secs, every_day)
 t.start()
 
-# @server.route('/' + API_TOKEN, methods=['POST'])
-# def getMessage():
-#     bot.process_new_updates([telebot.types.Update.de_json(request.stream.read().decode("utf-8"))])
-#     return "!", 200
+@server.route('/' + API_TOKEN, methods=['POST'])
+def getMessage():
+    bot.process_new_updates([telebot.types.Update.de_json(request.stream.read().decode("utf-8"))])
+    return "!", 200
 
-# @server.route('/')
-# def webhook():
-#     bot.remove_webhook()
-#     bot.set_webhook(url= 'https://ancient-wave-55409.herokuapp.com/' + API_TOKEN)
-#     return "!", 200
+@server.route('/')
+def webhook():
+    bot.remove_webhook()
+    bot.set_webhook(url= 'https://ancient-wave-55409.herokuapp.com/' + API_TOKEN)
+    return "!", 200
 
 
 
             
 if __name__ == '__main__':
-    # server.run(host="0.0.0.0", port=int(os.environ.get('PORT', 5000)))
-    bot.polling(none_stop=True, )
+    server.run(host="0.0.0.0", port=int(os.environ.get('PORT', 5000)))
+    # bot.polling(none_stop=True, )
 
 
