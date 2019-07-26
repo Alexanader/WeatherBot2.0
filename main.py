@@ -7,7 +7,7 @@ from telebot import util
 import os
 from threading import Timer
 import json 
-from intro_to_flask import app
+from import app
 
 from datetime import datetime, time 
 #-----------------
