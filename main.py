@@ -266,23 +266,23 @@ Wind speed: {5}""".format(result['name'], result['description'],
                           result['max temperature'], result['wind']))
 
 
-# x    = time(15, 00, 00, 00000)
-# y    = time(15, 24, 00, 00000)
-#secs = 30
+x    = time(15, 00, 00, 00000)
+y    = time(15, 24, 00, 00000)
+secs = 30
 
 
 # Функция every_day служит определителем времени, для отправки прогноза погоды 
 # ежендневно.
 
-#def every_day():
-    # if x < datetime.now().time() < y:
-    #     print(datetime.now().time())
-    #     data = deserialize_json('data.json')
-    #     send_weather()
+def every_day():
+    if x < datetime.now().time() < y:
+        print(datetime.now().time())
+        data = deserialize_json('data.json')
+        send_weather()
 
 
-#t = Timer(secs, every_day)
-#t.start()
+t = Timer(secs, every_day)
+t.start()
 
 @server.route('/' + API_TOKEN, methods=['POST'])
 def getMessage():
@@ -292,7 +292,7 @@ def getMessage():
 @server.route("/")
 def webhook():
     bot.remove_webhook()
-    bot.set_webhook(url= 'https://tranquil-wave-23240.herokuapp.com/' + API_TOKEN)
+    bot.set_webhook(url= 'https://murmuring-dusk-25416.herokuapp.com/' + API_TOKEN)
     return "!", 200
 
 
@@ -300,4 +300,4 @@ def webhook():
             
 if __name__ == '__main__':
     server.run(host="0.0.0.0", port=int(os.environ.get('PORT', 5000)))
-    # bot.polling(none_stop=True, )
+    # bot.polling(none_stop=True)
