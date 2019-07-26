@@ -267,7 +267,7 @@ Wind speed: {5}""".format(result['name'], result['description'],
 
 
 x    = time(17, 00, 00, 00000)
-y    = time(17, 27, 00, 00000)
+y    = time(17, 47, 00, 00000)
 secs = 30
 
 
@@ -300,4 +300,4 @@ def webhook():
             
 if __name__ == '__main__':
     server.run(host="0.0.0.0", port=int(os.environ.get('PORT', 5000)))
-    # bot.polling(none_stop=True)
+    # bot.polling(none_stop=True, timeout = 2000)
