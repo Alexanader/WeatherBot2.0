@@ -7,7 +7,7 @@ from telebot import util
 import os
 from threading import Timer
 import json 
-from import app
+import app
 
 from datetime import datetime, time 
 #-----------------
