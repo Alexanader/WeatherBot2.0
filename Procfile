@@ -1,1 +1,1 @@
-web: python3 dealscraper/main.py
+web: python3 main.py $PORT
