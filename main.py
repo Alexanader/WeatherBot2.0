@@ -266,8 +266,8 @@ Wind speed: {5}""".format(result['name'], result['description'],
                           result['max temperature'], result['wind']))
 
 
-x    = time(15, 00, 00, 00000)
-y    = time(15, 24, 00, 00000)
+x    = time(17, 00, 00, 00000)
+y    = time(17, 27, 00, 00000)
 secs = 30
 
 
