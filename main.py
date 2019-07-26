@@ -290,10 +290,10 @@ def getMessage():
     bot.process_new_updates([telebot.types.Update.de_json(request.stream.read().decode("utf-8"))])
     return "!", 200
 
-@server.route('/')
+@server.route("/")
 def webhook():
     bot.remove_webhook()
-    bot.set_webhook(url= 'https://ancient-wave-55409.herokuapp.com/' + API_TOKEN)
+    bot.set_webhook(url= 'https://tranquil-wave-23240.herokuapp.com/' + API_TOKEN)
     return "!", 200
 
 
