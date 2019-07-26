@@ -1,13 +1,12 @@
 import telebot
 import constants
+import os
 import requests
 from flask import Flask, request
 import logging
 from telebot import util
-import os
 from threading import Timer
 import json 
-import app
 
 from datetime import datetime, time 
 #-----------------
@@ -301,10 +300,7 @@ def webhook():
 
             
 if __name__ == '__main__':
-    #host="0.0.0.0"
-    port=int(os.environ.get("PORT", 5000))
-    app.run(debug=True, host='0.0.0.0', port=port)
-    #server.run(host="0.0.0.0", port=int(os.environ.get('PORT', 5000)))
+    server.run(host="0.0.0.0", port=int(os.environ.get('PORT', 5000)))
     # bot.polling(none_stop=True, )
 
 
