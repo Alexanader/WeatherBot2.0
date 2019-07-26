@@ -267,23 +267,23 @@ Wind speed: {5}""".format(result['name'], result['description'],
                           result['max temperature'], result['wind']))
 
 
-x    = time(15, 00, 00, 00000)
-y    = time(15, 24, 00, 00000)
-secs = 30
+# x    = time(15, 00, 00, 00000)
+# y    = time(15, 24, 00, 00000)
+#secs = 30
 
 
 # Функция every_day служит определителем времени, для отправки прогноза погоды 
 # ежендневно.
 
-def every_day():
-    if x < datetime.now().time() < y:
-        print(datetime.now().time())
-        data = deserialize_json('data.json')
-        send_weather()
+#def every_day():
+    # if x < datetime.now().time() < y:
+    #     print(datetime.now().time())
+    #     data = deserialize_json('data.json')
+    #     send_weather()
 
 
-t = Timer(secs, every_day)
-t.start()
+#t = Timer(secs, every_day)
+#t.start()
 
 @server.route('/' + API_TOKEN, methods=['POST'])
 def getMessage():
