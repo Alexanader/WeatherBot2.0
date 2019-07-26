@@ -61,7 +61,7 @@ def handle_start(message):
     user_markup.row('/start', '/stop')
     user_markup.row('/forecast')
     user_markup.row('/now')
-    bot.send_message(message.from_user.id, """Welcome...\n Type some city to get weather (ex. "London city")""",
+    bot.send_message(message.from_user.id, """Welcome...\n Type some city to get weather (ex. "London")""",
                     reply_markup=user_markup)
 
 
@@ -185,39 +185,39 @@ Wind speed: {5}""".format(result['name'], result['description'],
 @bot.message_handler(content_types=['text'])
 def handle_weather(message):
     buff = message.text
-    if 'city' in buff:
-        words = buff.split()
-        bot.send_message(message.from_user.id, 'Wait a bit...')
-        req_city = ' '.join(c for c in words if c != 'city')
-        try:
-            res = requests.get("http://api.openweathermap.org/data/2.5/weather?",
-                            params={'q': req_city, 'units': units, 'APPID': appid})
-            data = res.json()
-            data['weather'][0]['description']
-        except Exception as e:
-            bot.send_message(message.from_user.id, "I don't know this city, \
-                                                    please type another one or\
-                                                    fix existing...")
-            req_city = deserialize_json('data.json',message.chat.id)
-            print(req_city)
-            res = requests.get("http://api.openweathermap.org/data/2.5/weather?",
-                            params={'q': req_city, 'units': units, 'APPID': appid})
-            data = res.json()
-            bot.send_message(message.from_user.id, "Here is the weather for \
-                                                    the last correct city.")
-        else:
-            city = req_city
-            serialize_json(city, 'data.json',message.chat.id)
-            result = dict()
-            print(data)
-            result['description']     = data['weather'][0]['description']
-            result['temperature']     = str(data['main']['temp'])+' C'
-            result['min temperature'] = str(data['main']['temp_min'])+' C'
-            result['max temperature'] = str(data['main']['temp_max'])+' C'
-            result['wind']            = str(data['wind']['speed']) + 'm/s'
-            result['name']            = data['name']
+    #if 'city' in buff:
+    words = buff.split()
+    bot.send_message(message.from_user.id, 'Wait a bit...')
+    req_city = ' '.join(c for c in words if c != 'city')
+    try:
+        res = requests.get("http://api.openweathermap.org/data/2.5/weather?",
+                        params={'q': req_city, 'units': units, 'APPID': appid})
+        data = res.json()
+        data['weather'][0]['description']
+    except Exception as e:
+        bot.send_message(message.from_user.id, "I don't know this city, \
+                                                please type another one or\
+                                                fix existing...")
+        req_city = deserialize_json('data.json',message.chat.id)
+        print(req_city)
+        res = requests.get("http://api.openweathermap.org/data/2.5/weather?",
+                        params={'q': req_city, 'units': units, 'APPID': appid})
+        data = res.json()
+        bot.send_message(message.from_user.id, "Here is the weather for \
+                                                the last correct city.")
+    else:
+        city = req_city
+        serialize_json(city, 'data.json',message.chat.id)
+        result = dict()
+        print(data)
+        result['description']     = data['weather'][0]['description']
+        result['temperature']     = str(data['main']['temp'])+' C'
+        result['min temperature'] = str(data['main']['temp_min'])+' C'
+        result['max temperature'] = str(data['main']['temp_max'])+' C'
+        result['wind']            = str(data['wind']['speed']) + 'm/s'
+        result['name']            = data['name']
 
-            bot.send_message(message.from_user.id,
+        bot.send_message(message.from_user.id,
 """Weather in {0} today : {1}
 Temperature: {2}
 Minimal temperature: {3}
@@ -226,7 +226,7 @@ Wind speed: {5}""".format(result['name'], result['description'],
                           result['temperature'], result['min temperature'],
                           result['max temperature'], result['wind']))
 
-            log(message, '')
+        log(message, '')
 
 
 # Функция send_weather используетсья для вывода прогноза погоды вашего города 
@@ -285,22 +285,22 @@ def every_day():
 t = Timer(secs, every_day)
 t.start()
 
-@server.route('/' + API_TOKEN, methods=['POST'])
-def getMessage():
-    bot.process_new_updates([telebot.types.Update.de_json(request.stream.read().decode("utf-8"))])
-    return "!", 200
+# @server.route('/' + API_TOKEN, methods=['POST'])
+# def getMessage():
+#     bot.process_new_updates([telebot.types.Update.de_json(request.stream.read().decode("utf-8"))])
+#     return "!", 200
 
-@server.route('/')
-def webhook():
-    bot.remove_webhook()
-    bot.set_webhook(url= 'https://ancient-wave-55409.herokuapp.com/' + API_TOKEN)
-    return "!", 200
+# @server.route('/')
+# def webhook():
+#     bot.remove_webhook()
+#     bot.set_webhook(url= 'https://ancient-wave-55409.herokuapp.com/' + API_TOKEN)
+#     return "!", 200
 
 
 
             
 if __name__ == '__main__':
-    server.run(host="0.0.0.0", port=int(os.environ.get('PORT', 5000)))
-
+    # server.run(host="0.0.0.0", port=int(os.environ.get('PORT', 5000)))
+    bot.polling(none_stop=True, )
 
 
