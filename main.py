@@ -292,7 +292,7 @@ def getMessage():
 @server.route("/")
 def webhook():
     bot.remove_webhook()
-    bot.set_webhook(url= 'https://murmuring-dusk-25416.herokuapp.com/' + API_TOKEN)
+    bot.set_webhook(url= 'https://intense-harbor-67528.herokuapp.com/' + API_TOKEN)
     return "!", 200
 
 
