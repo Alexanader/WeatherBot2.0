@@ -19,7 +19,7 @@ pytest==5.0.1
 requests==2.18.4
 schedule==0.6.0
 six==1.11.0
-urllib3==1.22
+urllib3==1.26.5
 wcwidth==0.1.7
 Werkzeug==0.15.5
 zipp==0.5.2
